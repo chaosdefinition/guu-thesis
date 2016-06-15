@@ -1,0 +1,572 @@
+%% LaTeX source of the thesis.
+%% Use command 'xelatex --shell-escape guu-thesis.tex' TWICE to compile it into a PDF.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% document preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{ucthesis}
+
+\usepackage{amsmath}			% for mathematical features
+\usepackage{amssymb}			% for mathematical symbols
+\usepackage{amsthm}			% for theorems
+\usepackage{enumerate}			% for customized list numbering
+\usepackage{hyperref}			% for bookmarks and hyperlinks
+\usepackage[all]{hypcap}		% for correction of figure link targets
+
+% hyperref options
+\hypersetup{
+	% hide links
+	hidelinks,
+	% number bookmarks
+	bookmarksnumbered = true,
+	% fit width
+	pdfstartview = {FitH},
+	% PDF title
+	pdftitle = {Ching-Jung Guu's Doctorate Thesis},
+	% PDF subject
+	pdfsubject = {The Circular Wirelength Problem for Hypercubes},
+	% PDF author
+	pdfauthor = {Ching-Jung Guu}
+}
+
+\renewcommand{\theequation}{$\mathcal{\Alph{equation}}$}
+
+% theorems
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{prop}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+% thesis information
+\title{The Circular Wirelength Problem for Hypercubes}
+\author{Ching-Jung Guu}
+\degreeyear{1997}
+\degreesemester{December}
+\degree{Doctor of Philosophy}
+\chair{L. H. Harper}
+\othermembers{
+	N. E. Gretsky \\
+	A. R. Stralka
+}
+\numberofmembers{3}
+\field{Mathematics}
+\campus{Riverside}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% document body %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% cover pages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+\approvalpage
+\copyrightpage
+
+\begin{frontmatter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+The circular wirelength problem is defined;
+the special case for hypercubes is solved.
+A continuous analog of the solution of the discrete isoperimetric problem
+for hypercubes is also defined, and its properties discussed.
+\end{abstract}
+
+\tableofcontents
+
+\end{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+
+A graph $G = (V_G, E_G, \partial_G)$ is a triple,
+with $V_G$ being the set of vertices, $E_G$, the set of edges,
+and $\partial_G \colon E_G \rightarrow \binom{V_G}{2}$,
+a map from the edge set to 2-element subset of the vertices.
+$\partial_G$ tells us which two vertices are incident to a given edge.
+
+Given $v, w \in V_G$,
+\begin{definition}
+$d_G(v, w)$, the \emph{distance} from $v$ to $w$,
+is the length of the shortest path from $v$ to $w$ in $G$.
+\end{definition}
+
+The wirelength problem is a graph embedding problem which is defined as the following.
+
+Given two graphs, $G = (V_G, E_G, \partial_G)$ and $H = (V_H, E_H, \partial_H)$,
+with $|V_G| \le |V_H|$ and $\eta \colon V_G \rightarrow V_H$,
+one-to-one from $V_G$ into $V_H$:
+\begin{definition}
+\begin{equation*}
+wl(G, H; \eta) = \sum_{\substack{
+	e \in E \\
+	\partial(e) = \{v, w\}
+}} d_H(\eta(v), \eta(w))
+\end{equation*}
+is the \emph{wirelength of $G$ into $H$ with respect to $\eta$}.
+\end{definition}
+\begin{definition}
+The \emph{wirelength of $G$ into $H$}, $wl(G, H)$, is
+\begin{equation*}
+wl(G, H) = \min_{\eta \colon V_G \rightarrow V_H} wl(G, H; \eta).
+\end{equation*}
+\end{definition}
+
+The wirelength problem is to find $wl(G, H)$,
+together with the map $\eta$ which achieves the minimum wirelength.
+
+The classic wirelength problem for hypercubes,
+where the $n$-dimensional hypercube is embedded into a linear path of length $2^n$,
+was solved by L. H. Harper in \cite{Harper.1964} in 1964.
+Here we present the solution for the circular wirelength problem of hypercubes,
+where the $n$-dimensional hypercube is embedded into a circuit of length $2^n$.
+
+The general graph embedding problem is NP-complete,
+in fact when the target graph of the embedding problem is a path,
+it is already NP-complete \cite{Garey.1979}.
+It is clear that the circular wirelength is no greater than the linear wirelength for any graph.
+A proof that the circular wirelength for trees is the same as the classical wirelength
+has recently been presented by S. L. Bezrukov, and U.-P. Schroeder in \cite{Bezrukov.1998}.
+The results here show such is not the case for hypercubes.
+The circular wirelength for hypercubes is about three fourths that of the linear wirelength.
+We note that the circular wirelength for any graph is at least one half its linear wirelength,
+and this lower bound is achieved by complete graphs.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Preliminaries}
+
+\section{The Circular Wirelength Problem}
+
+We first define the domain and the target graph of our embedding problem,
+the hypercubes and the circuits.
+
+The hypercube of dimension $n$, we denote by $Q_n$.
+$Q_n = (V_n, E_n, \partial_n)$,
+$V_n = \{(v_1, v_2, \dots, v_n) = v \colon v_i \in \{0, 1\}\}$ and for $e \in E_n$,
+$\partial_n(e) = \{v, w\}$ iff $v$ and $w$ differ in exactly one coordinate.
+
+The circuit of length $n$, we denote by $C_n$.
+The vertices of the circuit are labeled $1, 2$ through $n$ in order.
+$C_n = (V_{C_n}, E_{C_n}, \partial_{C_n})$,
+$V_{C_n} = \{1, 2, \dots, n\}$ and $E_{C_n} = \{e_1, e_2, \dots, e_n\}$,
+with $\partial_{C_n}(e_k) = \{k, k + 1\}$ when $1 \le k < (n - 1)$,
+and $\partial_{C_n}(e_n) = \{n, 1\}$.
+
+$|V|$ is the integer which denotes the cardinality of $V$,
+\begin{definition}
+Let $G = (V, E, \partial)$.
+The wirelength of $G$ into $C_{|V|}$ is called the \emph{circular wirelength} of $G$.
+\end{definition}
+\begin{definition}
+A one-to-one and onto function $\eta \colon V \rightarrow \{1, 2, \dots, |V|\}$
+is also called a \emph{numbering} of $V$.
+\end{definition}
+
+Our goal is to find the circular wirelength of $Q_n$,
+the solution to the circular wirelength problem of $Q_n$.
+
+\section{The Discrete Isoperimetric Problem}
+
+Given $G = (V, E, \partial)$ a finite graph.
+For $S \subseteq V$, define
+\begin{equation*}
+\theta(S) = |\{e \in E \colon \partial(e) = \{v, w\}, v \in S, w \notin S\}|.
+\end{equation*}
+The discrete isoperimetric problem is to find a subset which has the minimum $\theta$ value
+over all subsets of the same cardinality.
+The subset, together with its $\theta$ value,
+is a solution to the discrete isoperimetric problem for the subset's cardinality.
+So, for each $k$, $0 \le k \le |V|$,
+a solution of the discrete isoperimetric problem is the pair $(S, \theta(S))$ where
+\begin{equation*}
+\theta(S) \le \theta(T), \textnormal{for all }T \subseteq V, |T| = |S| = k.
+\end{equation*}
+Note that a solution, $(S, \theta(S))$,
+provides a unique number $\theta(S)$ as the minimum,
+but the set $S$ need not be unique.
+We may also express the solution
+\begin{equation*}
+\theta(S) = \min_{T \in \binom{V}{k}} \theta(T).
+\end{equation*}
+We often refer to either $S$ or $\theta(S)$ without being explicit,
+when we speak of a solution.
+Whether it is the set or the number that we want should be clear by context.
+
+A number of problems in graph theory are translated and solved as discrete isoperimetric problems.
+In particular, graph embedding problems are transformed to minimum path problems
+on the \emph{derived network} of the embedding problem.
+The classical wirelength problem was solved in this fashion.
+For examples and solutions in this area,
+including more detailed exposition of all terminology, see \cite{Harper.2004}.
+
+The circular wirelength problem for hypercubes is no exception;
+the first step in our solution is the translation to its derived network.
+We will set up the derived network in the following section.
+
+\section{The Derived Network}
+
+We first establish the following equality relating the wirelength to the discrete isoperimetric problem,
+\begin{claim}
+\begin{equation*}
+wl(Q_n, C_{2^n}; \eta) = \sum_{i = 1}^{2^{n - 1}} \theta(\eta^{-1}\{i, i + 1, \dots, i + (2^{n - 1} - 1)\}).
+\end{equation*}
+\end{claim}
+
+\begin{proof}
+Let $e \in E_n$, an edge of $Q_n$,
+and $S \subset V_n$, a subset of the vertices of $Q_n$, define
+\begin{equation*}
+\delta(e, S) = \begin{cases}
+	1 & \textnormal{if } \partial(e) = \{v, w\}, v \in S, w \notin S. \\
+	0 & \textnormal{otherwise}.
+\end{cases}
+\end{equation*}
+With this definition, we have
+\begin{equation*}
+\sum_{e \in E_n} \delta(e, S) = \theta(S).
+\end{equation*}
+
+Let $S_i = \eta^{-1}\{i, i + 1, \dots, i + (2^{n - 1} - 1)\}$,
+and let $\partial(e) = \{v, w\}$,
+\begin{equation*}
+\sum_{i = 1}^{2^{n - 1}} \delta(e, S_i) = d_{C_n}(\eta(v), \eta(w)).
+\end{equation*}
+Therefore
+\begin{align*}
+wl(Q_n, C_{2^n}; \eta)
+& = \sum_{e \in E_n} d_{C_n}(\eta(v), \eta(w)) \\
+& = \sum_{e \in E_n} \sum_{i = 1}^{2^{n - 1}} \delta(e, S_i) \\
+& = \sum_{i = 1}^{2^{n - 1}} \sum_{e \in E_n} \delta(e, S_i) \\
+& = \sum_{i = 1}^{2^{n - 1}} \theta(S_i) \\
+& = \sum_{i = 1}^{2^{n - 1}} \theta(\eta^{-1}\{i, i + 1, \dots, i + (2^{n - 1} - 1)\}).
+\end{align*}
+\end{proof}
+
+Note that the sum on the right is $2^{n - 1}$ summands of $\theta$ of subsets of
+cardinality $2^{n - 1}$ in $V_n$.
+
+The derived network of this embedding problem is the vertex-weighted graph $D = (V_D, E_D, \partial_D)$,
+where $V_D$ consists of all subsets of $V_n$ of cardinality $2^{n - 1}$,
+and $e \in E_D$ with $\partial_D(e) = \{V, W\}$, if $V \Delta W = 2$.
+The weight of each vertex $V \in V_D$ is $\theta(V)$.
+
+A path in $D$, starting at any vertex $P$ and ending at the vertex $P^C$,
+with length exactly $2^{n - 1}$,
+is denoted by $P = \{P_1, P_2, \dots, P_{2^{n - 1}}, P_1^C\}$.
+$P$ corresponds to a numbering $\eta_P \colon V_n \rightarrow V_{C_{2^n}}$ in the following way:
+\begin{align*}
+\eta_P(P_1 \backslash P_2) = 1, & \textnormal{ and }
+\eta_P(P_2 \backslash P_1) = 2^{n - 1}, \\
+\eta_P(P_2 \backslash P_3) = 2, & \textnormal{ and }
+\eta_P(P_3 \backslash P_2) = 2^{n - 1} + 1, \\
+\cdots \\
+\eta_P(P_{2^{n - 1} - 1} \backslash P_{2^{n - 1}}) = 2^{n - 1} - 1, & \textnormal{ and }
+\eta_P(P_{2^{n - 1}} \backslash P_{2^{n - 1} - 1}) = 2^n - 2.
+\end{align*}
+Note that in this way,
+\begin{align*}
+P_1 & = \eta_P^{-1}\{1, 2, \dots, 2^{n - 1}\}, \\
+P_2 & = \eta_P^{-1}\{2, 3, \dots, 2^{n - 1} + 1\}, \\
+P_3 & = \eta_P^{-1}\{3, 4, \dots, 2^{n - 1} + 2\}, \\
+& \cdots \\
+P_{2^{n - 1}} & = \eta_P^{-1}(\{2^{n - 1}, 2^{n - 1} + 1, \dots, 2^n - 1\}).
+\end{align*}
+Since
+\begin{align*}
+wl(Q_n, C_{2^n}; \eta_P)
+& = \sum_{i = 1}^{2^{n - 1}} \theta(\eta^{-1}\{i, i + 1, \dots, i + (2^{n - 1} - 1)\}) \\
+& = \theta(P_1) + \theta(P_2) + \cdots + \theta(P_{2^{n - 1}}),
+\end{align*}
+$P = \{P_1, P_2, \dots, P_{2^{n - 1}}, P_1^C\}$ in our derived network has weight
+equal to that of the $wl(Q_n, C_{2^n}; \eta_P)$.
+Solving the circular wirelength problem is the same as finding the minimum
+of all such shortest paths from a set to its complement in our derived network.
+
+\section{Type of a Subset}
+
+Given any $S \subseteq V_n$,
+consider all possible $(n - 1)$-dimensional subcubes of $Q_n$.
+There are $2 n$ such subcubes.
+Let us denote these by $H_i$.
+\begin{equation*}
+Type(S) = \min_{1 \le i \le 2 n} |S \cap H_i|.
+\end{equation*}
+
+We pay special attention to subsets of cardinality $2^{n - 1}$,
+for vertices of our derived network are such sets.
+The possible types for these subsets ranges from $0$ to $2^{n - 2}$.
+For example, $(n - 1)$-dimensional subcubes are of type $0$,
+and the parity subsets are of type $2^{n - 2}$.
+We divide the subsets of cardinality $2^{n - 1}$ into two categories by their types.
+We will call subsets having types between and including $0$ and $2^{n - 3}$ \emph{small} and others \emph{big}.
+We abuse the terminology when it comes to a subset of type $2^{n - 3}$,
+it is both \emph{big} and \emph{small}.
+
+\section{Properties of a Path}
+
+Let $P = \{P_1, P_2, \dots, P_{2^{n - 1}}, P_1^C\}$ be a path in our derived network.
+We associate with $P$,
+\begin{definition}
+If $P$ is a path, its \emph{type sequence} is
+\begin{equation*}
+T_P = \{Type(P_1), Type(P_2), \dots, Type(P_{2^{n - 1}})\}.
+\end{equation*}
+\end{definition}
+
+The type sequence of a path, $T_P = \{t_1, t_2, \dots, t_{2^{n - 1}}\}$,
+has some nice properties.
+\begin{prop}
+\label{Proposition 1}
+\hfill
+\begin{enumerate}[(i)]
+	\item\label{Proposition 1.i} $T_P$ is continuous, and
+	\item\label{Proposition 1.ii} There exist at least two $i$ with $t_i \ge 2^{n - 3}$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+(\ref{Proposition 1.i}) The types of neighbors in a path are either the same
+or they differ by $1$,
+since the neighbors in our derived network have a symmetric difference of two.
+
+For (\ref{Proposition 1.ii}),
+let $P = \{P_1, P_2, \dots, P_{2^{n - 1}}, P_1^C\}$ be a path in our derived network,
+with type sequence $T_P = \{t_1, t_2, \dots, t_{2^{n - 1}}\}$.
+We first observe that $P_i$ is distance $(j - i)$ away from $P_j$,
+and neighbors on a path are close to the same subcube if both have type strictly smaller than $2^{n - 3}$.
+
+A type sequence must not have a subsequence of length greater than $2^{n - 2}$
+with elements that are strictly smaller than $2^{n - 3}$.
+If this is the case,
+let $T_S = \{t_i, t_{i + 1}, \dots, t_j\}$ be the subsequence.
+Distance between $t_i$ and $t_j$ is on the one hand $j - i > 2^{n - 2}$,
+but the same as the distance from $P_i$ to the common subcube
+plus the distance from the subcube to $P_j$,
+which is $t_i + t_j < 2^{n - 2}$.
+A path with length $2^{n - 1}$ must have at least two sets that are type \emph{big}.
+\end{proof}
+
+\section{The Greycode}
+
+The Greycode, $\mathcal{G} \colon V_n \rightarrow V_{C_{2^n}}$,
+is defined recursively.
+If $Q_{n - 1}$ is given together with the numbering,
+we think of numbering $Q_n$ as adding a neighbor to each vertex of the $Q_{n - 1}$,
+the new vertices give another copy of $Q_{n - 1}$.
+The numbering on the new $Q_{n - 1}$, starting with $2^{n - 1} + 1$,
+is the reverse of the original,
+with the neighbor of vertex numbered $2^{n - 1}$ numbered first as $2^{n - 1} + 1$,
+and neighbor of vertex numbered $1$ numbered last as $2^n$.
+The path which corresponds to the greycode in our derived network,
+$G = \{G_1, G_2, \dots, G_{2^{n - 1}}, G_1^C\}$, has type sequence
+\begin{equation*}
+T_G = \{0, 1, 2, \dots, 2^{n - 3}, (2^{n - 3} - 1), \dots, 0, 1, 2, \dots, 2^{n - 3}, (2^{n - 3} - 1), \dots, 0\}.
+\end{equation*}
+They are all of type \emph{small}, exactly two of type $0$ and $2^{n - 3}$,
+and exactly four of type $t$, $0 < t < 2^{n - 3}$.
+
+\section{Reduction to Inequalities}
+
+Let $\theta(n, k, t)$ denote the solution to the discrete isoperimetric problem
+for a subset of cardinality $k$, type $t$, in $Q_n$.
+We first calculate a bound for $\theta(n, k, t)$.
+\begin{equation}
+\label{Equation A}
+\theta(n, k, t) \ge \theta(n - 1, t) + \theta(n - 1, k - t) + k - 2 t,
+\end{equation}
+if we divide $Q_n$ into two halves,
+with one of the $Q_{n - 1}$ intersecting the set at $t$ places.
+The $\theta$ values of the halves are bounded below by the first two terms on the right,
+and the edges going across the two halves are bounded below by the third.
+
+We are particularly interested in subsets of cardinality $2^{n - 1}$,
+since those are the sets in our derived network.
+When the cardinality of the set is $2^{n - 1}$, we have the special case,
+\begin{equation}
+\label{Equation B}
+\theta(n, 2^{n - 1}, t) \ge \theta(n - 1, t) + \theta(n - 1, 2{n - 1} - t) + 2^{n - 1} - 2 t.
+\end{equation}
+
+Let $\theta(n, k)$ denote the solution to the discrete isoperimetric problem
+for cardinality $k$ in the $n$-dimensional cube, $Q_n = (V_n, E_n, \partial_n)$.
+\begin{equation*}
+\theta(n, k) = \min_{S \in \binom{V_n}{k}} \theta(S).
+\end{equation*}
+A corollary of Harper's solution to the discrete isoperimetric problem for cubes in \cite{Harper.1964},
+gives us a recursive formula for $\theta(n, k)$:
+\begin{equation*}
+\theta(n, k) = \begin{cases}
+	\theta(n - 1, k) + k & \textnormal{if } 0 \le k \le 2^{n - 1}; \\
+	\theta(n, 2^n - k) &  \textnormal{if } 2^{n - 1} \le k \le 2^n.
+\end{cases}
+\end{equation*}
+Using this formula, we simplify our special case (\ref{Equation A2}) to
+\begin{equation*}
+\theta(n, 2^{n - 1}, t) \ge 2 \cdot \theta(n - 1, t) + (2^{n - 1} - 2 t).
+\end{equation*}
+
+We note that each set in the path of the greycode achieves the minimum $\theta$ value
+on the right hand side of the inequality.
+These sets are of \emph{small} type, types between $0$ and $2^{n - 3}$;
+we know exactly what they look like.
+However, when the type of the set is greater than $2^{n - 3}$,
+we no longer have an obvious bound and interpretation for them.
+
+What we want to establish is a bound for the sets of \emph{big} types,
+types between $2^{n - 3}$ and $2^{n - 2}$.
+If we could show for $2^{n - 3} \le t \le 2^{n - 2}$,
+\begin{equation}
+\label{Equation C}
+\theta(n, 2^{n - 1}, t) \ge \frac{3}{4} \cdot 2^n,
+\end{equation}
+we may then consider paths which contain only sets of \emph{small} types,
+with the following reduction.
+Let $S_t$ denote the subset of cardinality $2^{n - 1}$, type $t$,
+with the minimum $\theta$, that is, $\theta(S_t) = \theta(n, 2^{n - 1}, t)$.
+We define the following operation on paths, $P \rightarrow P'$:
+\begin{equation*}
+\{P_1, P_2, \dots, P_{2^{n - 1}}\} \rightarrow \{P_1', P_2', \dots, P_{2^{n - 1}}'\}.
+\end{equation*}
+with
+\begin{enumerate}[(i)]
+	\item $P_i' = P_i$ if $Type(P_i) \le 2^{n - 3}$,
+	\item $P_i' = S_{2^{n - 3}}$ if $Type(P_i) > 2^{n - 3}$.
+\end{enumerate}
+
+Given $P = \{P_1, P_2, \dots, P_{2^{n - 1}}\}$, we abbreviate
+\begin{equation*}
+\Theta(P) = \theta(P_1) + \theta(P_2) + \cdots + \theta(P_{2^{n - 1}}).
+\end{equation*}
+$\Theta(P') \le \Theta(P)$ is clear by the definition,
+since $\theta(P_i') \le \theta(P_i)$, provided \ref{Equation C}.
+
+If a path, $P$, contains sets of type \emph{big} and \emph{small},
+the operation above takes it to $P'$ which consists of only \emph{small} sets,
+and note that $P'$ maintains the two properties of a path given in Proposition \ref{Proposition 1}.
+
+Let us look at $P'$.
+We first note that $\Theta(P')$ is the sum of the $\theta(P_i')$'s,
+thus we may arrange the summands anyway we see fit without changing $\Theta(P')$.
+We rearrange the order and call the result $P''$.
+\begin{align*}
+P'' & = \{P_1'', \dots, P_{2^{n - 2}}'', \dots, P_{2^{n - 1}}''\} \\
+    & = \{S_{2^{n - 3}}, \dots, S_{2^{n - 3}}, \dots, S_{2^{n - 3}}\}
+\end{align*}
+Let $m$ be the type of the set among $\{P_1'', P_2'', \dots, P_{2^{n - 2}}''\}$
+with the minimum $\theta$ value,
+and let $n$ be the type of the set among $\{P_{2^{n - 2}}'', P_{2^{n - 2} + 1}'', \dots, P_{2^{n - 2}}''\}$
+with the minimum $\theta$ value.
+Since $P'$ is continuous,
+containing among the $P_i'$'s are sets of all types in between $2^{n - 3}$ and $m$.
+There are at least two of each types in between,
+one on the way down to $S_m$, and one on the way back up to $S_{2^{n - 3}}$.
+Similarly, for the sets in between $2^{n - 3}$ and $n$.
+Keeping exactly two of the sets in between $2^{n - 3}$ and $m$, and $2^{n - 3}$ and $n$.
+Replacing the other sets with $S_m$ in the first half, and $S_n$ in the second half.
+We have the following sequence:
+\begin{align*}
+S = \{S_{2^{n - 3}}, S_{2^{n - 3} - 1}, \dots, S_{m + 1}, S_m, \dots, S_m, S_{m + 1},
+\dots, S_{2^{n - 3} - 1}, S_{2^{n - 3}}, \\
+S_{2^{n - 3} - 1}, \dots, S_{n + 1}, S_n,
+\dots, S_n, S_{n + 1}, \dots, S_{2^{n - 3} - 1}, S_{2^{n - 3}}\}.
+\end{align*}
+We have
+\begin{equation*}
+\Theta(P') = \Theta(P'') \ge \Theta(S).
+\end{equation*}
+
+Recall that for the Greycode,
+\begin{align*}
+\mathcal{G} = \{S_{2^{n - 3}}, S_{2^{n - 3} - 1}, \dots, S_1, S_0, S_1,
+\dots, S_{2^{n - 3} - 1}, S_{2^{n - 3}}, \\
+S_{2^{n - 3} - 1}, \dots, S_1, S_0, S_1, \dots, S_{2^{n - 3} - 1}, S_{2^{n - 3}}\}.
+\end{align*}
+We have $\Theta(S) \ge \Theta(\mathcal{G})$, which means
+\begin{equation*}
+\Theta(P) \ge \Theta(P') = \Theta(P'') \ge \Theta(S) \ge \Theta(\mathcal{G}),
+\end{equation*}
+proving the inequality
+\begin{equation}
+(k + 1) \cdot \theta(n, k) \ge \sum_{i = 0}^k \theta(n, i),
+\qquad \textnormal{for } 0 \le k \le 2^{n - 1},
+\end{equation}
+completes the claim that the path corresponding to the greycode is the optimal.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The McFunction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Inequalities}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{9}
+\addcontentsline{toc}{chapter}{\refname} % add bibliography to ToC
+
+\bibitem{Harper.2004}
+	L. H. Harper,
+	\emph{Global Methods for Combinatorial Isoperimetric Problems},
+	Cambridge University Press, 2004.
+
+\bibitem{Harper.1964}
+	L. H. harper,
+	\emph{Optimal assignments of numbers to vertices},
+	J. SIAM, vol. 12, pp. 131-135, 1964.
+
+\bibitem{Chavez.1998}
+	J. D. Chavez, R. Trapp,
+	\emph{The cyclic cutwidth of trees},
+	Discrete Applied Mathematics, vol. 87, pp. 25-32, 1998.
+
+\bibitem{Bezrukov.1998}
+	S. L. Bezrukov, U.-P. Schroeder,
+	\emph{The cyclic wirelength of trees},
+	Discrete Applied Mathematics, vol. 87, pp. 275-277, 1998.
+
+\bibitem{Bezrukov.2000}
+	S. L. Bezrukov, J. D. Chavez, L. H. Harper, M. Röttger, U.-P. Schroeder,
+	\emph{The Congestion of $n$-Cube Layout on a Rectangular Grid},
+	Discrete Mathematics, vol. 213, pp. 13-19, 2000.
+
+\bibitem{Frankl.1995}
+	P. Frankl, M. Matsumoto, I. Z. Ruzsa, N. Tokushige,
+	\emph{Minimum Shadows in Uniform Hypergraphs and a generalization of the Takagi Function},
+	J. Combinatorial Theory, Series A, vol. 69, pp. 125-148, 1995.
+
+\bibitem{Takagi.1973}
+	T. Takagi,
+	\emph{The Collected Papers of Teiji Takagi},
+	Iwanami Shoten, 1973.
+
+\bibitem{Garey.1979}
+	M. R. Garey, D. S. Johnson,
+	\emph{Computers and Intractability: A Guide to the Theory of NP-Completeness},
+	W. H. Freeman and Company, 1979.
+
+\bibitem{Steiglitz.1965}
+	K. Steiglitz, A. J. Bernstein,
+	\emph{Optimal binary coding of ordered numbers},
+	J. SIAM, vol. 13, pp. 441-443, 1965.
+
+\end{thebibliography}
+
+\end{document}
