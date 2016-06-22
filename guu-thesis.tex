@@ -112,7 +112,7 @@ $\partial_G$ tells us which two vertices are incident to a given edge.
 Given $v, w \in V_G$,
 \begin{definition}
 \label{Definition 1}
-$d_G(v, w)$, the \emph{distance} from $v$ to $w$,
+$d_G(v, w)$, the \emph{distance from $v$ to $w$},
 is the length of the shortest path from $v$ to $w$ in $G$.
 \end{definition}
 
@@ -120,7 +120,7 @@ The wirelength problem is a graph embedding problem which is defined as the foll
 
 Given two graphs, $G = (V_G, E_G, \partial_G)$ and $H = (V_H, E_H, \partial_H)$,
 with $|V_G| \le |V_H|$ and $\eta \colon V_G \rightarrow V_H$,
-one-to-one from $V_G$ into $V_H$:
+one-to-one from $V_G$ into $V_H$,
 \begin{definition}
 \label{Definition 2}
 \begin{equation*}
@@ -180,7 +180,7 @@ The circuit of length $n$, we denote by $C_n$.
 The vertices of the circuit are labeled $1, 2$ through $n$ in order.
 $C_n = (V_{C_n}, E_{C_n}, \partial_{C_n})$,
 $V_{C_n} = \{1, 2, \dots, n\}$ and $E_{C_n} = \{e_1, e_2, \dots, e_n\}$,
-with $\partial_{C_n}(e_k) = \{k, k + 1\}$ when $1 \le k < (n - 1)$,
+with $\partial_{C_n}(e_k) = \{k, k + 1\}$ when $1 \le k \le (n - 1)$,
 and $\partial_{C_n}(e_n) = \{n, 1\}$.
 
 $|V|$ is the integer which denotes the cardinality of $V$,
@@ -230,7 +230,7 @@ A number of problems in graph theory are translated and solved as discrete isope
 In particular, graph embedding problems are transformed to minimum path problems
 on the \emph{derived network} of the embedding problem.
 The classical wirelength problem was solved in this fashion.
-For examples and solutions in this area,
+For examples and solutions in the area,
 including more detailed exposition of all terminology, see \cite{Harper.2004}.
 
 The circular wirelength problem for hypercubes is no exception;
@@ -647,7 +647,7 @@ and the definition of $\takagi(x)$, we have
 \frac{[2^n x]}{2^n}\right) - 2 n \\
 & = \lim_{n \rightarrow \infty} \frac{\theta(n - 1, [2^n x])}{2^{n - 1}} + 2 x - 2 x \\
 & = \lim_{n \rightarrow \infty} \frac{\theta(n - 1, [2^{n - 1} 2 x])}{2^{n - 1}} \\
-& = \takagi(2 x)
+& = \takagi(2 x).
 \end{align*}
 \end{proof}
 
