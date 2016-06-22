@@ -1243,6 +1243,53 @@ The proof is complete!
 \chapter{Conclusion}
 \label{Chapter 5}
 
+Recall that for a subset of $Q_n$, cardinality $k$, and type $t$,
+\begin{equation*}
+\theta(n, k, t) = \min_{\substack{
+	S \subseteq V_n, |S| = k \\
+	Type(S) = t
+}} \theta(S).
+\end{equation*}
+Since the vertices in the derived network of our problem are sets of cardinality $2^{n - 1}$,
+we investigated $\theta(n, 2^{n - 1}, t)$,
+and found when $0 \le t \le 2^{n - 3}$, we have solutions to $\theta(n, 2^{n - 1}, t)$.
+We were fortunate to be able to prove the inequality,
+\begin{equation*}
+\theta(n, 2^{n - 1}, t) \ge \frac{3}{4} \cdot 2^n, \quad
+\textnormal{when } 2^{n - 3} \le t \le 2^{n - 2}.
+\end{equation*}
+Thus completing the solution to the circular wirelength problem for hypercubes.
+However, we were unsuccessful at improving the lower bound of $\theta(n, 2^{n - 1}, t)$,
+though we have much computational evidence to believe that a much bigger lower bound exists.
+We believe that in general,
+\begin{equation*}
+\theta(n, k, t) \ge k + 2 t.
+\end{equation*}
+We note that the very special case,
+\begin{equation*}
+\theta(n, k, 0) \ge k,
+\end{equation*}
+is true.
+We hope for not only a sharper bound for $\theta(n, k, t)$,
+but also, an explicit solution for $\theta(n, k, t)$.
+
+We state here also some extension and variation of our problem.
+First, instead of the circuit with all the edges having the uniform length of $1$,
+we assign variable lengths to each edge, and find the circular wirelength.
+The classical wirelength problem in this setting is solved in \cite{Steiglitz.1965}
+by K. Steiglitz and A. J. Bernstein.
+They noted that the lexicographic code is also optimal in this case.
+Second, we change the range graph from a circuit to a torus, product of circuits,
+or a cylinder, product of a path and a circuit, and investigate the wirelength.
+Similar embedding problem with grids, product of paths, as the range graph
+has been presented by L. H. Harper, J. D. Chavez, and S. Bezrukov in \cite{Bezrukov.2000}.
+Other than the wirelength problem, we may consider other embedding problems
+with the circuit as the range graph - the circular cutwidth, for example.
+It has been shown, by J. D. Chavez and R. Trapp in \cite{Chavez.1998},
+that the circular cutwidth for trees is the same as the linear cutwidth.
+We are interested in classifying the graphs which have the same solution
+under the two different embeddings, and solving for the ones that do not have this property.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
