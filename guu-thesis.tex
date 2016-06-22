@@ -900,6 +900,343 @@ By induction,
 This completes the proof to the theorem.
 \end{proof}
 
+\section{$\theta(n, 2^{n - 1}, t) \ge \frac{3}{4} \cdot 2^n$, when $2^{n - 3} \le t \le 2^{n - 2}$}
+\label{Section 4.2}
+
+Recall that $\theta(n, k, t)$ denotes $\theta$ values of subsets of cardinality $k$,
+type $t$, in an $n$-dimensional cube.
+
+We first introduce the function,
+$f \colon \mathbb{R} \rightarrow (-\infty, \frac{3}{4}]$,
+\begin{equation*}
+f(x) = \frac{3}{4} - \frac{64}{7} (x - \frac{1}{2})^2.
+\end{equation*}
+$f(x)$ is a parabola with downward concavity, and vertex $(\frac{1}{2}, \frac{3}{4})$.
+We also restrict our attention of the function to the interval $[0, 1]$.
+
+We will first verify that
+\begin{claim}
+\label{Claim 5}
+$f(x - t) + f(x + t) + 2 t \ge 2 f(x)$, when $0 \le t \le \frac{7}{64}$.
+\end{claim}
+\begin{proof}
+\begin{align*}
+  & f(x - t) + f(x + t) + 2 t \\
+= & \frac{3}{4} - \frac{64}{7} ((x - t) - \frac{1}{2})^2 +
+    \frac{3}{4} - \frac{64}{7} ((x + t) - \frac{1}{2})^2 + 2 t \\
+= & 2 (\frac{3}{4}) - \frac{64}{7} \left(((x - t) - \frac{1}{2})^2 +
+    ((x + t) - \frac{1}{2})^2\right) + 2 t \\
+= & 2 (\frac{3}{4}) - \frac{64}{7} \left((x - t)^2 - (x - t) + \frac{1}{4} +
+    (x + t)^2 - (x + t) + \frac{1}{4}\right) + 2 t \\
+= & 2 (\frac{3}{4}) - \frac{64}{7} (x^2 - 2 x t + t^2 - x + t + 2 (\frac{1}{4}) +
+    x^2 + 2 x t + t^2 - x - t) + 2 t \\
+= & 2 (\frac{3}{4}) - \frac{64}{7} (2 x^2 + 2 t^2 - 2 x + 2 (\frac{1}{4})) + 2 t \\
+= & 2 (\frac{3}{4} - \frac{64}{7} (x^2 - x + \frac{1}{4} + t^2) + t) \\
+= & 2 (\frac{3}{4} - \frac{64}{7} (x - \frac{1}{2})^2 - \frac{64}{7} t^2 + t) \\
+= & 2 (\frac{3}{4} - \frac{64}{7} (x - \frac{1}{2})^2) - 2 (\frac{64}{7}) (t^2 - \frac{7}{64} t) \\
+= & 2 f(x) - 2 (\frac{64}{7}) (t^2 - \frac{7}{64} t).
+\end{align*}
+
+$t^2 - \frac{7}{64} t \le 0$, we have $f(x - t) + f(x + t) + 2 t \ge 2 f(x)$.
+
+$t^2 - \frac{7}{64} t = t (t - \frac{7}{64})$, which is $\le 0$ when $0 \le t \le \frac{7}{64}$.
+
+This completes the proof of the claim.
+\end{proof}
+
+In the following claim, $x$ and $y$ are dyadic rationals with denominator $2^n$.
+\begin{claim}
+\label{Claim 6}
+For all $n$, when $\frac{1}{24} \le y \le \frac{1}{24} + \frac{7}{64}$,
+and $x \in [0, \frac{1}{2}]$,
+\begin{equation*}
+\theta(n, 2^n x, 2^n y) \ge f(x) \cdot 2^n.
+\end{equation*}
+\end{claim}
+\begin{proof}
+Recall from Chapter \ref{Chapter 2}, the inequality (\ref{Equation 2.1}),
+\begin{align*}
+\theta(n, 2^n x, 2^n y)
+& \ge \theta(n - 1, 2^n y) + \theta(n - 1, 2^n (x - y)) + 2^n x - 2 \cdot 2^n y \\
+& = 2^n \left(\frac{\theta(n - 1, 2^n y)}{2^n} + \frac{\theta(n - 1, 2^n (x - y))}{2^n} + x - 2 y
+	\right) \\
+& = 2^n \left(\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n y)}{2^{n - 1}} +
+	      \frac{1}{2} \cdot \frac{\theta(n - 1, 2^n (x - y))}{2^{n - 1}} + x - 2 y
+	\right).
+\end{align*}
+To complete the proof of the claim, we need to verify that
+\begin{equation*}
+\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n y)}{2^{n - 1}} +
+\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n (x - y))}{2^{n - 1}} + x - 2 y \ge f(x).
+\end{equation*}
+Using results from the $\takagi$cFunction and equation (\ref{Equation 3.2}),
+we noticed that
+\begin{equation*}
+\frac{\theta(n - 1, 2^{n - 1} 2 y)}{2^{n - 1}} = \takagi(2 y) = 2 (\takagi(y) - y)
+\end{equation*}
+and
+\begin{equation*}
+\frac{\theta(n - 1, 2^{n - 1} 2 (x - y))}{2^{n - 1}}
+= \takagi(2 (x - y))
+= 2 (\takagi(x - y) - (x - y))
+\end{equation*}
+at the dyadic rationals.
+
+We also have
+\begin{equation*}
+\sum_{i = 1}^\infty \Delta_i(x) = \takagi(x),
+\end{equation*}
+so the partial sum
+\begin{equation*}
+\sum_{i = 1}^\infty \Delta_i(x) \le \takagi(x)
+\end{equation*}
+for every $n$.
+We replace the statement we need to verify,
+\begin{equation*}
+\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n y)}{2^{n - 1}} +
+\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n (x - y))}{2^{n - 1}} + x - 2 y \ge f(x)
+\end{equation*}
+by
+\begin{equation*}
+\takagi(y) - y + \takagi(x - y) - (x - y) + (x - 2 y)
+= \takagi(y) + \takagi(x - y) - 2y
+\ge f(x).
+\end{equation*}
+And verify that
+\begin{equation}
+\label{Equation 4.7}
+\sum_{i = 1}^n \Delta_i(y) + \sum_{i = 1}^n \Delta_i(x - y) - 2 y \ge f(x)
+\end{equation}
+for some $n$.
+
+Let us denote the left hand side of the inequality (\ref{Equation 4.7}) by $a(x, y)$
+when $n = 11$.
+
+Let $\{c_0, c_1, c_2, \dots, c_{2^{11}}\}$ enumerate the dyadic rationals
+between $0$ and $\frac{1}{2}$ which have $2^{12}$ in the denominator.
+
+Let $\{d_0, d_1, d_2, \dots, d_k\}$ enumerate the dyadic rationals
+between $\frac{1}{24}$ and $(\frac{1}{24} + \frac{7}{64})$ which have $2^{12}$
+in the denominator.
+We verified on the computer that for all possible $j$ and $k$,
+\begin{align*}
+a(c_j, d_k) & \ge f(c_j), \\
+a(c_j, d_k) & \ge f(c_{j + 1}).
+\end{align*}
+Since $a(x, y)$ is linear on the square with sides $\frac{1}{2^{12}}$
+and $f(x)$ is a parabola which is increasing between $0$ and $\frac{1}{2}$,
+for all $x$ with $c_j \le x \le c_{j + 1}$, and all $y$ with $d_k \le y \le d_{k + 1}$
+we have
+\begin{equation*}
+a(x, y) \ge \min\{a(c_j, d_k), a(c_{j + 1}, d_k)\} \ge f(c_{j + 1}) \ge f(x).
+\end{equation*}
+We conclude thus
+\begin{equation*}
+a(x, y) \ge f(x).
+\end{equation*}
+This completes the proof of the claim.
+\end{proof}
+
+\begin{theorem}
+\label{Theorem 3}
+For $n \ge 5$, $y \ge \frac{1}{24} + \frac{7}{64}$, and $x \in [0, 1]$,
+\begin{equation*}
+\theta(n, 2^n x, 2^n y) \ge f(x) \cdot 2^n.
+\end{equation*}
+
+The inequality (\ref{Equation 2.3}),
+\begin{equation*}
+\theta(n, 2^{n - 1}, t) \ge \frac{3}{4} \cdot 2^n, \quad
+\textnormal{when } 2^{n - 3} \le t \le 2^{n - 2},
+\end{equation*}
+is a special case of Theorem \ref{Theorem 3},
+when $\frac{1}{8} \le y \le \frac{1}{4}$ and $x = \frac{1}{2}$.
+\end{theorem}
+\begin{proof}
+We prove this theorem by induction.
+\begin{enumerate}[(1)]
+\item Base Case:
+	\begin{equation*}
+	\theta(n, 2^5 x, 2^5 y) \ge f(x) \cdot 2^5,
+	\textnormal{when } y \ge \frac{1}{24} + \frac{7}{64},
+	\textnormal{and } x \in [0, 1]
+	\end{equation*}
+	is verified by the computer.
+\item Induction Hypothesis:
+	\begin{equation*}
+	\theta(m, 2^m x, 2^m y) \ge f(x) \cdot 2^m,
+	\textnormal{if } m < n, y \ge \frac{1}{24} + \frac{7}{64},
+	\textnormal{and } x \in [0, 1].
+	\end{equation*}
+	Given that $x \in [0, 1]$, and $y \ge \frac{1}{24} + \frac{7}{64}$,
+	we want to show that
+	\begin{equation*}
+	\theta(n, 2^n x, 2^n y) \ge f(x) \cdot 2^n.
+	\end{equation*}
+	Let $S \subseteq V_n$ with $|S| = 2^n x$, and $Type(S) = 2^n y$.
+
+	Divide $S$ along the division that gives $|S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$.
+
+	We note that such a division must exist, or we are done.
+	If
+	\begin{equation*}
+	|S_1 \Delta S_2| > \frac{7}{64} \cdot 2^n,
+	\end{equation*}
+	then
+	\begin{equation*}
+	\theta(S) > \frac{7}{64} \cdot n \cdot 2^n.
+	\end{equation*}
+	When $n > 7$,
+	\begin{equation*}
+	\frac{7}{64} \cdot n \cdot 2^n > \frac{3}{4} \cdot 2^n \ge f(x) \cdot 2^n.
+	\end{equation*}
+	We note that $\frac{3}{4}$ is the maximum value for $f(x)$.
+	We are done.
+
+	When $n = 6$, if
+	\begin{equation*}
+	|S_1 \Delta S_2| > \frac{7}{64} \cdot 2^6 = 7,
+	\end{equation*}
+	then
+	\begin{equation*}
+	|S_1 \Delta S_2| \ge 8.
+	\end{equation*}
+	So,
+	\begin{equation*}
+	\theta(S) \ge 6 \cdot 8 = 48 \ge \frac{3}{4} \cdot 2^6 \ge f(x) \cdot 2^6.
+	\end{equation*}
+	We are again done.
+
+	We have $S \subseteq V_n$, $|S| = 2^n x$,
+	and $Type(S) \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n$,
+	with $S$ partitioned into $S_1$ and $S_2$, $S = S_1 \cup S_2$,
+	$|S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$,
+	and we assume that $|S_1| \ge |S_2|$.
+	There are two cases which we will consider separately.
+
+	\textbf{CASE I.} $|S_1| \le 2^{n - 2}$.
+
+	Let $|S_1| - |S_2| = 2^n t$, we have the following system of equations:
+	\begin{align*}
+	|S_1| - |S_2| & = 2^n t, \\
+	|S_1| + |S_2| & = 2^n x.
+	\end{align*}
+	Solving for $|S_1|$ and $|S_2|$, we have that
+	\begin{align*}
+	|S_1| & = \frac{2^n x + 2^n t}{2} = (x + t) \cdot 2^{n - 1}, \\
+	|S_2| & = \frac{2^n x - 2^n t}{2} = (x - t) \cdot 2^{n - 1}.
+	\end{align*}
+	Let $Type(S_i) = w_i \cdot 2^{n - 1}$.
+
+	Let $w \cdot 2^{n - 1} = \min\{w_1 \cdot 2^{n - 1}, w_2 \cdot 2^{n - 1}\}$.
+
+	Then
+	\begin{align*}
+	w \cdot 2^{n - 1} + w \cdot 2^{n - 1} + \frac{7}{64} \cdot 2^n & \ge Type(S) \\
+	2 \cdot 2^{n - 1} w + \frac{7}{64} \cdot 2^n & \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n \\
+	2 \cdot 2^{n - 1} w & \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n - \frac{7}{64} \cdot 2^n \\
+	2 \cdot 2^{n - 1} w & \ge \frac{1}{24} \cdot 2^n \\
+	w & \ge \frac{1}{24}.
+	\end{align*}
+	So we conclude that $w_i \ge \frac{1}{24}$,
+	together with Claim \ref{Claim 4}, Claim \ref{Claim 5},
+	and the Induction Hypothesis, we compute
+	\begin{align*}
+	\theta(S)
+	& \ge \theta(S_1) + \theta(S_2) + t \cdot 2^n \\
+	& \ge f(x + t) \cdot 2^{n - 1} + f(x - t) \cdot 2^{n - 1} + 2 t \cdot 2^{n - 1} \\
+	& \ge 2^{n - 1} (2 f(x)) \\
+	& \ge 2^n f(x).
+	\end{align*}
+	This completes CASE I.
+
+	\textbf{CASE II.} $|S_1| > 2^{n - 2}$.
+	\begin{enumerate}[(i)]
+	\item Let $h = |S_1 \backslash S_2|$ in $|S_1 \Delta S_2|$, and
+	\item let $l = |S_2 \backslash S_1|$ in $|S_1 \Delta S_2|$.
+	\end{enumerate}
+	$h + l = |S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$, and
+	\begin{align*}
+	|S_1| + |S_2| & = |S|, \\
+	|S_1| - |S_2| & = (h - l).
+	\end{align*}
+	Solving the system of equations, we have
+	\begin{align*}
+	|S_1| & = \frac{|S|}{2} + \frac{h - l}{2}, \\
+	|S_2| & = \frac{|S|}{2} - \frac{h - l}{2}.
+	\end{align*}
+	Let $w_i \cdot 2^{n - 1} = Type(S_i)$,
+	and $w \cdot 2^{n - 1} = \min\{Type(S_1), Type(S_2)\}$.
+	If $w = w_2$, we are done, the proof proceeds exactly as CASE I.
+	Otherwise, we first calculate the $Type(S_1^C)$.
+
+	We prove first the following claim.
+	\begin{claim}
+	\label{Claim 7}
+	Let $c = |S_1| - 2^{n - 2}$, then $Type(S_1^C) = Type(S_1) - c$.
+	\end{claim}
+	\begin{proof}
+	\begin{align*}
+	Type(S_1^C)
+	& = 2^{n - 2} - (|S_1| - Type(S_1)) \\
+	& = 2^{n - 2} - |S_1| + Type(S_1) \\
+	& = 2^{n - 2} - (2^{n - 2} + c) + Type(S_1) \\
+	& = 2^{n - 2} - 2^{n - 2} - c + Type(S_1) \\
+	& = Type(S_1) - c.
+	\end{align*}
+	\end{proof}
+	We also make the following calculation:
+	\begin{align*}
+	|S_1| & = \frac{|S|}{2} + \frac{h - l}{2} \\
+	      & \le \frac{2^{n - 1}}{2} + \frac{h - l}{2} \\
+	      & = 2^{n - 2} + \frac{h - l}{2}.
+	\end{align*}
+	Since
+	\begin{equation*}
+	|S_1| = 2^{n - 2} + c,
+	\end{equation*}
+	we conclude from the above calculation
+	\begin{equation*}
+	c \le \frac{h - l}{2}.
+	\end{equation*}
+	\begin{align*}
+	Type(S_1) + (Type(S_1) + l) & \ge Type(S) \\
+	2 \cdot Type(S_1) + l & \ge Type(S) \\
+	2 \cdot Type(S_1) & \ge Type(S) - l \\
+	Type(S_1) & \ge \frac{Type(S) - l}{2}.
+	\end{align*}
+	From Claim \ref{Claim 7}, and earlier calculation,
+	\begin{align*}
+	Type(S_1^C)
+	& = Type(S_1) - c \\
+	& \ge Type(S_1) - \frac{h - l}{2} \\
+	& \ge \frac{Type(S) - l}{2} - \frac{h - l}{2} \\
+	& = \frac{1}{2} (Type(S) - h) \\
+	& \ge \frac{1}{2} ((\frac{1}{24} + \frac{7}{64}) \cdot 2^n - \frac{7}{64} \cdot 2^n) \\
+	& = \frac{1}{2} (\frac{1}{24} \cdot 2^n) \\
+	& = \frac{1}{24} \cdot 2^{n - 1}.
+	\end{align*}
+	We abbreviate $Type(S_1^C)$ with $w^C$.
+
+	We note that $w_2 \ge w_1 \ge w^C + c \ge \frac{1}{24} \cdot 2^{n - 1}$.
+
+	It is now possible to proceed with the induction, since
+	\begin{align*}
+	\theta(S)
+	& \ge \theta(S_1) + \theta(S_2) + (h - l) \cdot 2^n \\
+	& = \theta(S_1^C) + \theta(S_2) + (h - l) \cdot 2^n \\
+	& \ge 2^{n - 1} \cdot f(1 - (x + (h - l))) +
+	      2^{n - 1} \cdot f(x - (h - l)) + 2 \cdot (h - l) \cdot 2^{n - 1} \\
+	& = 2^{n - 1} \cdot f(x + (h - l)) + 2^{n - 1} \cdot f(x - (h - l)) +
+	    2 \cdot (h - l) \cdot 2^{n - 1} \\
+	& = 2^{n - 1} (f(x + (h - l)) + f(x - (h - l)) + 2 \cdot (h - l)) \\
+	& \ge 2^{n - 1} (2 f(x)) \\
+	& = 2^n f(x).
+	\end{align*}
+\end{enumerate}
+The proof is complete!
+\end{proof}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Chapter 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
