@@ -283,7 +283,7 @@ cardinality $2^{n - 1}$ in $V_n$.
 
 The derived network of this embedding problem is the vertex-weighted graph $D = (V_D, E_D, \partial_D)$,
 where $V_D$ consists of all subsets of $V_n$ of cardinality $2^{n - 1}$,
-and $e \in E_D$ with $\partial_D(e) = \{V, W\}$, if $V \Delta W = 2$.
+and $e \in E_D$ with $\partial_D(e) = \{V, W\}$, if $|V \Delta W| = 2$.
 The weight of each vertex $V \in V_D$ is $\theta(V)$.
 
 A path in $D$, starting at any vertex $P$ and ending at the vertex $P^C$,
@@ -295,6 +295,8 @@ $P$ corresponds to a numbering $\eta_P \colon V_n \rightarrow V_{C_{2^n}}$ in th
 \eta_P(P_2 \backslash P_1) = 2^{n - 1}, \\
 \eta_P(P_2 \backslash P_3) = 2, & \textnormal{ and }
 \eta_P(P_3 \backslash P_2) = 2^{n - 1} + 1, \\
+\eta_P(P_3 \backslash P_4) = 3, & \textnormal{ and }
+\eta_P(P_4 \backslash P_3) = 2^{n - 1} + 2, \\
 \cdots \\
 \eta_P(P_{2^{n - 1} - 1} \backslash P_{2^{n - 1}}) = 2^{n - 1} - 1, & \textnormal{ and }
 \eta_P(P_{2^{n - 1}} \backslash P_{2^{n - 1} - 1}) = 2^n - 2.
@@ -407,7 +409,7 @@ and exactly four of type $t$, $0 < t < 2^{n - 3}$.
 \section{Reduction to Inequalities}
 \label{Section 2.7}
 
-Let $\theta(n, k, t)$ denote the solution to the discrete isoperimetric problem
+Let $\theta(n, k, t)$ denote the solution to the isoperimetric problem
 for a subset of cardinality $k$, type $t$, in $Q_n$.
 We first calculate a bound for $\theta(n, k, t)$.
 \begin{equation}
@@ -424,7 +426,7 @@ since those are the sets in our derived network.
 When the cardinality of the set is $2^{n - 1}$, we have the special case,
 \begin{equation}
 \label{Equation 2.2}
-\theta(n, 2^{n - 1}, t) \ge \theta(n - 1, t) + \theta(n - 1, 2{n - 1} - t) + 2^{n - 1} - 2 t.
+\theta(n, 2^{n - 1}, t) \ge \theta(n - 1, t) + \theta(n - 1, 2^{n - 1} - t) + 2^{n - 1} - 2 t.
 \end{equation}
 
 Let $\theta(n, k)$ denote the solution to the discrete isoperimetric problem
@@ -521,6 +523,7 @@ Recall that for the Greycode,
 \dots, S_{2^{n - 3} - 1}, S_{2^{n - 3}}, \\
 S_{2^{n - 3} - 1}, \dots, S_1, S_0, S_1, \dots, S_{2^{n - 3} - 1}, S_{2^{n - 3}}\}.
 \end{align*}
+
 We have $\Theta(S) \ge \Theta(\mathcal{G})$, which means
 \begin{equation*}
 \Theta(P) \ge \Theta(P') = \Theta(P'') \ge \Theta(S) \ge \Theta(\mathcal{G}),
@@ -585,7 +588,7 @@ Recall that
 \end{equation*}
 denotes the solution to the discrete isoperimetric problem on $Q_n$.
 
-The function $\takagi{}$ defined on $[0, 1]$ by
+The function $\takagi$ defined on $[0, 1]$ by
 \begin{equation*}
 \takagi(x) = \lim_{n \rightarrow \infty} \frac{\theta(n, [2^n x])}{2^n}
 \end{equation*}
@@ -644,7 +647,7 @@ and the definition of $\takagi(x)$, we have
 2 (\takagi(x) - x)
 & = 2 \lim_{n \rightarrow \infty} \frac{\theta(n, [2^n x])}{2^n} - 2 x \\
 & = 2 \lim_{n \rightarrow \infty} \left(\frac{\theta(n - 1, [2^n x])}{2^n} +
-\frac{[2^n x]}{2^n}\right) - 2 n \\
+\frac{[2^n x]}{2^n}\right) - 2 x \\
 & = \lim_{n \rightarrow \infty} \frac{\theta(n - 1, [2^n x])}{2^{n - 1}} + 2 x - 2 x \\
 & = \lim_{n \rightarrow \infty} \frac{\theta(n - 1, [2^{n - 1} 2 x])}{2^{n - 1}} \\
 & = \takagi(2 x).
