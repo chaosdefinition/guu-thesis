@@ -748,46 +748,51 @@ and recall the recursive formula for $\theta(n, k)$:
 \end{equation}
 We proceed by induction on $n$.
 \begin{enumerate}[(1)]
-\item Base Case: For $n = 2$, $\theta(2, 1) = 2 = \theta(2, 2)$ is clear.
+\item Base Case: For $n = 2$,
+	\begin{equation*}
+	\theta(2, 1) = 2 = \theta(2, 2) \textnormal{ is clear}.
+	\end{equation*}
 \item Induction Hypothesis:
 	\begin{equation}
 	\label{Equation 4.2}
 	\theta(m, k) \ge \theta(m, 2^{m - 2}), \qquad
 	\textnormal{for } m < n \textnormal{ when } 2^{m - 2} \le k \le 2^{m - 1}.
 	\end{equation}
-	We want to show that $\theta(n, k) \ge \theta(n, 2^{n - 2})$,
-	for $2^{m - 2} \le k \le 2^{m - 1}$.
-
-	Staring with $\theta(n, k)$, we have
-	\begin{align*}
-	\theta(n, k) & = \theta(n - 1, k) + k \tag{by \ref{Equation 4.1}} \\
-		     & = \theta(n - 1, 2^{n - 1} - k) + k. \tag{by \ref{Equation 4.1}}
-	\end{align*}
-	We break it into two cases from here.
-
-	\textbf{CASE I.} $2^{n - 2} \le k \le 3 \cdot 2^{n - 3}$.
-	\begin{equation*}
-	2^{n - 2} \le k \le 3 \cdot 2^{n - 3} \iff 2^{n - 3} \le (2^{n - 1} - k) \le 2^{n - 2},
-	\end{equation*}
-	so, we have
-	\begin{align*}
-	\theta(n - 1, (2^{n - 1} - k)) + k
-	& \ge \theta(n - 1, 2^{n - 2}) + 2^{n - 2} \tag{by \ref{Equation 4.2}} \\
-	& = \theta(n, 2^{n - 2}). \tag{by \ref{Equation 4.1}}
-	\end{align*}
-	\textbf{CASE II.} $3 \cdot 2^{n - 3} \le k \le 2^{n - 1}$.
-	\begin{equation*}
-	3 \cdot 2^{n - 3} \le k \le 2^{n - 1} \iff 0 \le (2^{n - 1} - k) \le 2^{n - 3},
-	\end{equation*}
-	so, we have
-	\begin{align*}
-	\theta(n - 1, (2^{n - 1} - k)) + k
-	& = \theta(n - 2, (2^{n - 1} - k)) + (2^{n - 1} - k) + k \tag{by \ref{Equation 4.1}} \\
-	& = \theta(n - 2, (2^{n - 1} - k)) + 2^{n - 1} \\
-	& \ge 2^{n - 1} \\
-	& = \theta(n, 2^{n - 2}).
-	\end{align*}
 \end{enumerate}
+
+We want to show that $\theta(n, k) \ge \theta(n, 2^{n - 2})$,
+for $2^{m - 2} \le k \le 2^{m - 1}$.
+
+Staring with $\theta(n, k)$, we have
+\begin{align*}
+\theta(n, k)
+& = \theta(n - 1, k) + k \tag{by \ref{Equation 4.1}} \\
+& = \theta(n - 1, (2^{n - 1} - k)) + k. \tag{by \ref{Equation 4.1}}
+\end{align*}
+
+We break it into two cases from here. \\
+\textbf{CASE I.} $2^{n - 2} \le k \le 3 \cdot 2^{n - 3}$.
+\begin{equation*}
+2^{n - 2} \le k \le 3 \cdot 2^{n - 3} \iff 2^{n - 3} \le (2^{n - 1} - k) \le 2^{n - 2},
+\end{equation*}
+so, we have
+\begin{align*}
+\theta(n - 1, (2^{n - 1} - k)) + k
+& \ge \theta(n - 1, 2^{n - 2}) + 2^{n - 2} \tag{by \ref{Equation 4.2}} \\
+& = \theta(n, 2^{n - 2}). \tag{by \ref{Equation 4.1}}
+\end{align*}
+\textbf{CASE II.} $3 \cdot 2^{n - 3} \le k \le 2^{n - 1}$.
+\begin{equation*}
+3 \cdot 2^{n - 3} \le k \le 2^{n - 1} \iff 0 \le (2^{n - 1} - k) \le 2^{n - 3},
+\end{equation*}
+so, we have
+\begin{align*}
+\theta(n - 1, (2^{n - 1} - k)) + k
+& = \theta(n - 2, (2^{n - 1} - k)) + (2^{n - 1} - k) + k \tag{by \ref{Equation 4.1}} \\
+& = \theta(n - 2, (2^{n - 1} - k)) + 2^{n - 1} \\
+& \ge 2^{n - 1} \\
+& = \theta(n, 2^{n - 2}).
+\end{align*}
 \end{proof}
 
 We now prove the special case of the inequality when $k = 2^{n - 1}$, that is,
@@ -815,7 +820,7 @@ By induction,
 	\sum_{i = 0}^1 \theta(1, i)
 	& = \theta(1, 0) + \theta(1, 1) \\
 	& = 0 + 1 \\
-	& = 1^2
+	& = 1^2.
 	\end{align*}
 \item Induction Hypothesis:
 	\begin{equation}
@@ -823,22 +828,25 @@ By induction,
 	\textnormal{For } m < n, \qquad
 	\sum_{i = 0}^{2^{m - 1}} \theta(n, i) = (2^{m - 1})^2.
 	\end{equation}
-	We want to show that $\sum_{i = 0}^{2^{n - 1}} \theta(n, i) = (2^{n - 1})^2$.
-	\begin{align*}
-	\sum_{i = 0}^{2^{n - 1}} \theta(n, i)
-	& = \sum_{i = 0}^{2^{n - 1}} (\theta(n - 1, i) + i) \tag{by \ref{Equation 4.1}} \\
-	& = \sum_{i = 0}^{2^{n - 1}} \theta(n - 1, i) + \sum_{i = 0}^{2^{n - 1}} i \\
-	& = \sum_{i = 0}^{2^{n - 2}} \theta(n - 1, i) +
-	    \sum_{i = 2^{n - 2} + 1}^{2^{n - 1}} \theta(n - 1, i) + \sum_{i = 0}^{2^{n - 1}} i \\
-	& = 2 \sum_{i = 0}^{2^{n - 2}} \theta(n - 1, i) - \theta(n - 1, 2^{n - 2}) +
-	    \sum_{i = 0}^{2^{n - 1}} i \tag{by \ref{Equation 4.1}} \\
-	& = 2 (2^{n - 2})^2 - 2^{n - 2} + \sum_{i = 0}^{2^{n - 1}} i \tag{by \ref{Equation 4.3}} \\
-	& = 2 (2^{n - 2})^2 - 2^{n - 2} + \frac{2^{n - 1}(1 + 2^{n - 1})}{2} \\
-	& = 2 (2^{n - 2})^2 - 2^{n - 2} + \frac{2^{n - 1}}{2} + \frac{(2^{n - 1})^2}{2} \\
-	& = 2 (2^{n - 2})^2 + 2 (2^{n - 2})^2 \\
-	& = (2^{n - 1})^2.
-	\end{align*}
 \end{enumerate}
+
+We want to show that $\sum_{i = 0}^{2^{n - 1}} \theta(n, i) = (2^{n - 1})^2$.
+
+\begin{align*}
+\sum_{i = 0}^{2^{n - 1}} \theta(n, i)
+& = \sum_{i = 0}^{2^{n - 1}} (\theta(n - 1, i) + i) \tag{by \ref{Equation 4.1}} \\
+& = \sum_{i = 0}^{2^{n - 1}} \theta(n - 1, i) + \sum_{i = 0}^{2^{n - 1}} i \\
+& = \sum_{i = 0}^{2^{n - 2}} \theta(n - 1, i) +
+    \sum_{i = 2^{n - 2} + 1}^{2^{n - 1}} \theta(n - 1, i) + \sum_{i = 0}^{2^{n - 1}} i \\
+& = 2 \sum_{i = 0}^{2^{n - 2}} \theta(n - 1, i) - \theta(n - 1, 2^{n - 2}) +
+    \sum_{i = 0}^{2^{n - 1}} i \tag{by \ref{Equation 4.1}} \\
+& = 2 (2^{n - 2})^2 - 2^{n - 2} + \sum_{i = 0}^{2^{n - 1}} i \tag{by \ref{Equation 4.3}} \\
+& = 2 (2^{n - 2})^2 - 2^{n - 2} + \frac{2^{n - 1}(1 + 2^{n - 1})}{2} \\
+& = 2 (2^{n - 2})^2 - 2^{n - 2} + \frac{2^{n - 1}}{2} + \frac{(2^{n - 1})^2}{2} \\
+& = 2 (2^{n - 2})^2 + 2 (2^{n - 2})^2 \\
+& = (2^{n - 1})^2.
+\end{align*}
+
 We are done with Claim \ref{Claim 4}.
 \end{proof}
 
@@ -865,43 +873,42 @@ By induction,
 	\begin{equation}
 	\label{Equation 4.4}
 	\textnormal{For } m < n, \qquad 0 \le k \le 2^{m - 1}, \qquad
-	(k + 1) \cdot \theta(n, k) \ge \sum_{i = 0}^k \theta(1, i).
+	(k + 1) \cdot \theta(n, k) \ge \sum_{i = 0}^k \theta(n, i).
 	\end{equation}
-	We want to show that $(k + 1) \cdot \theta(n, k) \ge \sum_{i = 0}^k \theta(1, i)$,
-	for $0 \le k \le 2^{n - 1}$.
-
-	There are two cases.
-
-	\textbf{CASE I.} $0 \le k \le 2^{n - 2}$.
-	\begin{align*}
-	(k + 1) \cdot \theta(n, k)
-	& = (k + 1) \cdot (\theta(n - 1, k) + k) \tag{by \ref{Equation 4.1}} \\
-	& = (k + 1) \cdot \theta(n - 1, k) + (k + 1) \cdot k \\
-	& \ge \sum_{i = 0}^k \theta(n - 1, i) + (k^2 + k) \tag{by \ref{Equation 4.4}} \\
-	& \ge \sum_{i = 0}^k \theta(n - 1, i) + \sum_{i = 0}^k i \\
-	& = \sum_{i = 0}^k (\theta(n - 1, i) + i) \\
-	& = \sum_{i = 0}^k \theta(n, i). \tag{by \ref{Equation 4.1}}
-	\end{align*}
-
-	\textbf{CASE II.} $2^{n - 2} \le k \le 2^{n - 1}$.
-
-	Suppose not, that is,
-	\begin{equation}
-	\label{Equation 4.5}
-	(k + 1) \cdot \theta(n, k) < \sum_{i = 0}^k \theta(n, i),
-	\end{equation}
-	then
-	\begin{align*}
-	\sum_{i = 0}^{2^{n - 1}} \theta(n, i)
-	& = \sum_{i = 0}^k \theta(n, i) + \sum_{i = k + 1}^{2^{n - 1}} \theta(n, i) \\
-	& > (k + 1) \cdot \theta(n, k) + \sum_{i = k + 1}^{2^{n - 1}} \theta(n, i) \tag{by \ref{Equation 4.5}} \\
-	& \ge (k + 1) \cdot \theta(n, 2^{n - 1}) + \sum_{i = k + 1}^{2^{n - 1}} \theta(n, i) \tag{by Claim \ref{Claim 3}} \\
-	& \ge (k + 1) \cdot \theta(n, 2^{n - 1}) + (2^{n - 1} - k) \cdot \theta(n, 2^{n - 1}) \tag{by Claim \ref{Claim 3}} \\
-	& = (k + 1 + 2^{n - 1} - k) \cdot \theta(n, 2^{n - 1}) \\
-	& = (2^{n - 1} + 1) \cdot \theta(n, 2^{n - 1}). \numberthis \label{Equation 4.6}
-	\end{align*}
-	(\ref{Equation 4.6}) contradicts the special case we took care of in Claim \ref{Claim 4}.
 \end{enumerate}
+
+We want to show that $(k + 1) \cdot \theta(n, k) \ge \sum_{i = 0}^k \theta(1, i)$,
+for $0 \le k \le 2^{n - 1}$.
+
+There are two cases. \\
+\textbf{CASE I.} $0 \le k \le 2^{n - 2}$.
+\begin{align*}
+(k + 1) \cdot \theta(n, k)
+& = (k + 1) \cdot (\theta(n - 1, k) + k) \tag{by \ref{Equation 4.1}} \\
+& = (k + 1) \cdot \theta(n - 1, k) + (k + 1) \cdot k \\
+& \ge \sum_{i = 0}^k \theta(n - 1, i) + (k^2 + k) \tag{by \ref{Equation 4.4}} \\
+& \ge \sum_{i = 0}^k \theta(n - 1, i) + \sum_{i = 0}^k i \\
+& = \sum_{i = 0}^k (\theta(n - 1, i) + i) \\
+& = \sum_{i = 0}^k \theta(n, i). \tag{by \ref{Equation 4.1}}
+\end{align*}
+\textbf{CASE II.} $2^{n - 2} \le k \le 2^{n - 1}$. \\
+Suppose not, that is,
+\begin{equation}
+\label{Equation 4.5}
+(k + 1) \cdot \theta(n, k) < \sum_{i = 0}^k \theta(n, i),
+\end{equation}
+then
+\begin{align*}
+\sum_{i = 0}^{2^{n - 1}} \theta(n, i)
+& = \sum_{i = 0}^k \theta(n, i) + \sum_{i = k + 1}^{2^{n - 1}} \theta(n, i) \\
+& > (k + 1) \cdot \theta(n, k) + \sum_{i = k + 1}^{2^{n - 1}} \theta(n, i) \tag{by \ref{Equation 4.5}} \\
+& \ge (k + 1) \cdot \theta(n, 2^{n - 1}) + \sum_{i = k + 1}^{2^{n - 1}} \theta(n, i) \tag{by Claim \ref{Claim 3}} \\
+& \ge (k + 1) \cdot \theta(n, 2^{n - 1}) + (2^{n - 1} - k) \cdot \theta(n, 2^{n - 1}) \tag{by Claim \ref{Claim 3}} \\
+& = (k + 1 + 2^{n - 1} - k) \cdot \theta(n, 2^{n - 1}) \\
+& = (2^{n - 1} + 1) \cdot \theta(n, 2^{n - 1}). \numberthis \label{Equation 4.6}
+\end{align*}
+(\ref{Equation 4.6}) contradicts the special case we took care of in Claim \ref{Claim 4}.
+
 This completes the proof to the theorem.
 \end{proof}
 
@@ -941,9 +948,7 @@ $f(x - t) + f(x + t) + 2 t \ge 2 f(x)$, when $0 \le t \le \frac{7}{64}$.
 = & 2 (\frac{3}{4} - \frac{64}{7} (x - \frac{1}{2})^2) - 2 (\frac{64}{7}) (t^2 - \frac{7}{64} t) \\
 = & 2 f(x) - 2 (\frac{64}{7}) (t^2 - \frac{7}{64} t).
 \end{align*}
-
-$t^2 - \frac{7}{64} t \le 0$, we have $f(x - t) + f(x + t) + 2 t \ge 2 f(x)$.
-
+$t^2 - \frac{7}{64} t \le 0$, we have $f(x - t) + f(x + t) + 2 t \ge 2 f(x)$. \\
 $t^2 - \frac{7}{64} t = t (t - \frac{7}{64})$, which is $\le 0$ when $0 \le t \le \frac{7}{64}$.
 
 This completes the proof of the claim.
@@ -971,8 +976,8 @@ Recall from Chapter \ref{Chapter 2}, the inequality (\ref{Equation 2.1}),
 \end{align*}
 To complete the proof of the claim, we need to verify that
 \begin{equation*}
-\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n y)}{2^{n - 1}} +
-\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n (x - y))}{2^{n - 1}} + x - 2 y \ge f(x).
+\frac{1}{2} \cdot \frac{\theta(n - 1, 2^{n - 1} \cdot 2 y)}{2^{n - 1}} +
+\frac{1}{2} \cdot \frac{\theta(n - 1, 2^{n - 1} \cdot 2 (x - y))}{2^{n - 1}} + x - 2 y \ge f(x).
 \end{equation*}
 Using results from the $\takagi$cFunction and equation (\ref{Equation 3.2}),
 we noticed that
@@ -998,8 +1003,8 @@ so the partial sum
 for every $n$.
 We replace the statement we need to verify,
 \begin{equation*}
-\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n y)}{2^{n - 1}} +
-\frac{1}{2} \cdot \frac{\theta(n - 1, 2^n (x - y))}{2^{n - 1}} + x - 2 y \ge f(x)
+\frac{1}{2} \cdot \frac{\theta(n - 1, 2^{n - 1} \cdot 2 y)}{2^{n - 1}} +
+\frac{1}{2} \cdot \frac{\theta(n - 1, 2^{n - 1} \cdot 2 (x - y))}{2^{n - 1}} + x - 2 y \ge f(x),
 \end{equation*}
 by
 \begin{equation*}
@@ -1048,6 +1053,7 @@ For $n \ge 5$, $y \ge \frac{1}{24} + \frac{7}{64}$, and $x \in [0, 1]$,
 \begin{equation*}
 \theta(n, 2^n x, 2^n y) \ge f(x) \cdot 2^n.
 \end{equation*}
+\end{theorem}
 
 The inequality (\ref{Equation 2.3}),
 \begin{equation*}
@@ -1056,7 +1062,7 @@ The inequality (\ref{Equation 2.3}),
 \end{equation*}
 is a special case of Theorem \ref{Theorem 3},
 when $\frac{1}{8} \le y \le \frac{1}{4}$ and $x = \frac{1}{2}$.
-\end{theorem}
+
 \begin{proof}
 We prove this theorem by induction.
 \begin{enumerate}[(1)]
@@ -1073,172 +1079,174 @@ We prove this theorem by induction.
 	\textnormal{if } m < n, y \ge \frac{1}{24} + \frac{7}{64},
 	\textnormal{and } x \in [0, 1].
 	\end{equation*}
-	Given that $x \in [0, 1]$, and $y \ge \frac{1}{24} + \frac{7}{64}$,
-	we want to show that
-	\begin{equation*}
-	\theta(n, 2^n x, 2^n y) \ge f(x) \cdot 2^n.
-	\end{equation*}
-	Let $S \subseteq V_n$ with $|S| = 2^n x$, and $Type(S) = 2^n y$.
-
-	Divide $S$ along the division that gives $|S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$.
-
-	We note that such a division must exist, or we are done.
-	If
-	\begin{equation*}
-	|S_1 \Delta S_2| > \frac{7}{64} \cdot 2^n,
-	\end{equation*}
-	then
-	\begin{equation*}
-	\theta(S) > \frac{7}{64} \cdot n \cdot 2^n.
-	\end{equation*}
-	When $n > 7$,
-	\begin{equation*}
-	\frac{7}{64} \cdot n \cdot 2^n > \frac{3}{4} \cdot 2^n \ge f(x) \cdot 2^n.
-	\end{equation*}
-	We note that $\frac{3}{4}$ is the maximum value for $f(x)$.
-	We are done.
-
-	When $n = 6$, if
-	\begin{equation*}
-	|S_1 \Delta S_2| > \frac{7}{64} \cdot 2^6 = 7,
-	\end{equation*}
-	then
-	\begin{equation*}
-	|S_1 \Delta S_2| \ge 8.
-	\end{equation*}
-	So,
-	\begin{equation*}
-	\theta(S) \ge 6 \cdot 8 = 48 \ge \frac{3}{4} \cdot 2^6 \ge f(x) \cdot 2^6.
-	\end{equation*}
-	We are again done.
-
-	We have $S \subseteq V_n$, $|S| = 2^n x$,
-	and $Type(S) \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n$,
-	with $S$ partitioned into $S_1$ and $S_2$, $S = S_1 \cup S_2$,
-	$|S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$,
-	and we assume that $|S_1| \ge |S_2|$.
-	There are two cases which we will consider separately.
-
-	\textbf{CASE I.} $|S_1| \le 2^{n - 2}$.
-
-	Let $|S_1| - |S_2| = 2^n t$, we have the following system of equations:
-	\begin{align*}
-	|S_1| - |S_2| & = 2^n t, \\
-	|S_1| + |S_2| & = 2^n x.
-	\end{align*}
-	Solving for $|S_1|$ and $|S_2|$, we have that
-	\begin{align*}
-	|S_1| & = \frac{2^n x + 2^n t}{2} = (x + t) \cdot 2^{n - 1}, \\
-	|S_2| & = \frac{2^n x - 2^n t}{2} = (x - t) \cdot 2^{n - 1}.
-	\end{align*}
-	Let $Type(S_i) = w_i \cdot 2^{n - 1}$.
-
-	Let $w \cdot 2^{n - 1} = \min\{w_1 \cdot 2^{n - 1}, w_2 \cdot 2^{n - 1}\}$.
-
-	Then
-	\begin{align*}
-	w \cdot 2^{n - 1} + w \cdot 2^{n - 1} + \frac{7}{64} \cdot 2^n & \ge Type(S) \\
-	2 \cdot 2^{n - 1} w + \frac{7}{64} \cdot 2^n & \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n \\
-	2 \cdot 2^{n - 1} w & \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n - \frac{7}{64} \cdot 2^n \\
-	2 \cdot 2^{n - 1} w & \ge \frac{1}{24} \cdot 2^n \\
-	w & \ge \frac{1}{24}.
-	\end{align*}
-	So we conclude that $w_i \ge \frac{1}{24}$,
-	together with Claim \ref{Claim 4}, Claim \ref{Claim 5},
-	and the Induction Hypothesis, we compute
-	\begin{align*}
-	\theta(S)
-	& \ge \theta(S_1) + \theta(S_2) + t \cdot 2^n \\
-	& \ge f(x + t) \cdot 2^{n - 1} + f(x - t) \cdot 2^{n - 1} + 2 t \cdot 2^{n - 1} \\
-	& \ge 2^{n - 1} (2 f(x)) \\
-	& \ge 2^n f(x).
-	\end{align*}
-	This completes CASE I.
-
-	\textbf{CASE II.} $|S_1| > 2^{n - 2}$.
-	\begin{enumerate}[(i)]
-	\item Let $h = |S_1 \backslash S_2|$ in $|S_1 \Delta S_2|$, and
-	\item let $l = |S_2 \backslash S_1|$ in $|S_1 \Delta S_2|$.
-	\end{enumerate}
-	$h + l = |S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$, and
-	\begin{align*}
-	|S_1| + |S_2| & = |S|, \\
-	|S_1| - |S_2| & = (h - l).
-	\end{align*}
-	Solving the system of equations, we have
-	\begin{align*}
-	|S_1| & = \frac{|S|}{2} + \frac{h - l}{2}, \\
-	|S_2| & = \frac{|S|}{2} - \frac{h - l}{2}.
-	\end{align*}
-	Let $w_i \cdot 2^{n - 1} = Type(S_i)$,
-	and $w \cdot 2^{n - 1} = \min\{Type(S_1), Type(S_2)\}$.
-	If $w = w_2$, we are done, the proof proceeds exactly as CASE I.
-	Otherwise, we first calculate the $Type(S_1^C)$.
-
-	We prove first the following claim.
-	\begin{claim}
-	\label{Claim 7}
-	Let $c = |S_1| - 2^{n - 2}$, then $Type(S_1^C) = Type(S_1) - c$.
-	\end{claim}
-	\begin{proof}
-	\begin{align*}
-	Type(S_1^C)
-	& = 2^{n - 2} - (|S_1| - Type(S_1)) \\
-	& = 2^{n - 2} - |S_1| + Type(S_1) \\
-	& = 2^{n - 2} - (2^{n - 2} + c) + Type(S_1) \\
-	& = 2^{n - 2} - 2^{n - 2} - c + Type(S_1) \\
-	& = Type(S_1) - c.
-	\end{align*}
-	\end{proof}
-	We also make the following calculation:
-	\begin{align*}
-	|S_1| & = \frac{|S|}{2} + \frac{h - l}{2} \\
-	      & \le \frac{2^{n - 1}}{2} + \frac{h - l}{2} \\
-	      & = 2^{n - 2} + \frac{h - l}{2}.
-	\end{align*}
-	Since
-	\begin{equation*}
-	|S_1| = 2^{n - 2} + c,
-	\end{equation*}
-	we conclude from the above calculation
-	\begin{equation*}
-	c \le \frac{h - l}{2}.
-	\end{equation*}
-	\begin{align*}
-	Type(S_1) + (Type(S_1) + l) & \ge Type(S) \\
-	2 \cdot Type(S_1) + l & \ge Type(S) \\
-	2 \cdot Type(S_1) & \ge Type(S) - l \\
-	Type(S_1) & \ge \frac{Type(S) - l}{2}.
-	\end{align*}
-	From Claim \ref{Claim 7}, and earlier calculation,
-	\begin{align*}
-	Type(S_1^C)
-	& = Type(S_1) - c \\
-	& \ge Type(S_1) - \frac{h - l}{2} \\
-	& \ge \frac{Type(S) - l}{2} - \frac{h - l}{2} \\
-	& = \frac{1}{2} (Type(S) - h) \\
-	& \ge \frac{1}{2} ((\frac{1}{24} + \frac{7}{64}) \cdot 2^n - \frac{7}{64} \cdot 2^n) \\
-	& = \frac{1}{2} (\frac{1}{24} \cdot 2^n) \\
-	& = \frac{1}{24} \cdot 2^{n - 1}.
-	\end{align*}
-	We abbreviate $Type(S_1^C)$ with $w^C$.
-
-	We note that $w_2 \ge w_1 \ge w^C + c \ge \frac{1}{24} \cdot 2^{n - 1}$.
-
-	It is now possible to proceed with the induction, since
-	\begin{align*}
-	\theta(S)
-	& \ge \theta(S_1) + \theta(S_2) + (h - l) \cdot 2^n \\
-	& = \theta(S_1^C) + \theta(S_2) + (h - l) \cdot 2^n \\
-	& \ge 2^{n - 1} \cdot f(1 - (x + (h - l))) +
-	      2^{n - 1} \cdot f(x - (h - l)) + 2 \cdot (h - l) \cdot 2^{n - 1} \\
-	& = 2^{n - 1} \cdot f(x + (h - l)) + 2^{n - 1} \cdot f(x - (h - l)) +
-	    2 \cdot (h - l) \cdot 2^{n - 1} \\
-	& = 2^{n - 1} (f(x + (h - l)) + f(x - (h - l)) + 2 \cdot (h - l)) \\
-	& \ge 2^{n - 1} (2 f(x)) \\
-	& = 2^n f(x).
-	\end{align*}
 \end{enumerate}
+
+Given that $x \in [0, 1]$, and $y \ge \frac{1}{24} + \frac{7}{64}$,
+we want to show that
+\begin{equation*}
+\theta(n, 2^n x, 2^n y) \ge f(x) \cdot 2^n.
+\end{equation*}
+
+Let $S \subseteq V_n$ with $|S| = 2^n x$, and $Type(S) = 2^n y$.
+
+Divide $S$ along the division that gives $|S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$.
+
+We note that such a division must exist, or we are done.
+If
+\begin{equation*}
+|S_1 \Delta S_2| > \frac{7}{64} \cdot 2^n,
+\end{equation*}
+then
+\begin{equation*}
+\theta(S) > \frac{7}{64} \cdot n \cdot 2^n.
+\end{equation*}
+When $n > 7$,
+\begin{equation*}
+\frac{7}{64} \cdot n \cdot 2^n > \frac{3}{4} \cdot 2^n \ge f(x) \cdot 2^n.
+\end{equation*}
+We note that $\frac{3}{4}$ is the maximum value for $f(x)$.
+We are done. \\
+When $n = 6$, if
+\begin{equation*}
+|S_1 \Delta S_2| > \frac{7}{64} \cdot 2^6 = 7,
+\end{equation*}
+then
+\begin{equation*}
+|S_1 \Delta S_2| \ge 8.
+\end{equation*}
+So,
+\begin{equation*}
+\theta(S) \ge 6 \cdot 8 = 48 \ge \frac{3}{4} \cdot 2^6 \ge f(x) \cdot 2^6.
+\end{equation*}
+We are again done.
+
+We have $S \subseteq V_n$, $|S| = 2^n x$,
+and $Type(S) \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n$,
+with $S$ partitioned into $S_1$ and $S_2$, $S = S_1 \cup S_2$,
+$|S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$,
+and we assume that $|S_1| \ge |S_2|$.
+
+There are two cases which we will consider separately. \\
+\textbf{CASE I.} $|S_1| \le 2^{n - 2}$. \\
+Let $|S_1| - |S_2| = 2^n t$, we have the following system of equations:
+\begin{align*}
+|S_1| - |S_2| & = 2^n t, \\
+|S_1| + |S_2| & = 2^n x.
+\end{align*}
+Solving for $|S_1|$ and $|S_2|$, we have that
+\begin{align*}
+|S_1| & = \frac{2^n x + 2^n t}{2} = (x + t) \cdot 2^{n - 1}, \\
+|S_2| & = \frac{2^n x - 2^n t}{2} = (x - t) \cdot 2^{n - 1}.
+\end{align*}
+Let $Type(S_i) = w_i \cdot 2^{n - 1}$. \\
+Let $w \cdot 2^{n - 1} = \min\{w_1 \cdot 2^{n - 1}, w_2 \cdot 2^{n - 1}\}$. \\
+Then
+\begin{align*}
+w \cdot 2^{n - 1} + w \cdot 2^{n - 1} + \frac{7}{64} \cdot 2^n & \ge Type(S) \\
+2 \cdot 2^{n - 1} w + \frac{7}{64} \cdot 2^n & \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n \\
+2 \cdot 2^{n - 1} w & \ge (\frac{1}{24} + \frac{7}{64}) \cdot 2^n - \frac{7}{64} \cdot 2^n \\
+2 \cdot 2^{n - 1} w & \ge \frac{1}{24} \cdot 2^n \\
+w & \ge \frac{1}{24}.
+\end{align*}
+So we conclude that $w_i \ge \frac{1}{24}$,
+together with Claim \ref{Claim 4}, Claim \ref{Claim 5},
+and the Induction Hypothesis, we compute
+\begin{align*}
+\theta(S)
+& \ge \theta(S_1) + \theta(S_2) + t \cdot 2^n \\
+& \ge f(x + t) \cdot 2^{n - 1} + f(x - t) \cdot 2^{n - 1} + 2 t \cdot 2^{n - 1} \\
+& \ge 2^{n - 1} (2 f(x)) \\
+& \ge 2^n f(x).
+\end{align*}
+This completes CASE I.
+
+\textbf{CASE II.} $|S_1| > 2^{n - 2}$.
+\begin{enumerate}[(i)]
+\item Let $h = |S_1 \backslash S_2|$ in $|S_1 \Delta S_2|$, and
+\item let $l = |S_2 \backslash S_1|$ in $|S_1 \Delta S_2|$.
+\end{enumerate}
+
+$h + l = |S_1 \Delta S_2| \le \frac{7}{64} \cdot 2^n$, and
+\begin{align*}
+|S_1| + |S_2| & = |S|, \\
+|S_1| - |S_2| & = (h - l).
+\end{align*}
+Solving the system of equations, we have
+\begin{align*}
+|S_1| & = \frac{|S|}{2} + \frac{h - l}{2}, \\
+|S_2| & = \frac{|S|}{2} - \frac{h - l}{2}.
+\end{align*}
+Let $w_i \cdot 2^{n - 1} = Type(S_i)$,
+and $w \cdot 2^{n - 1} = \min\{Type(S_1), Type(S_2)\}$.
+If $w = w_2$, we are done, the proof proceeds exactly as CASE I.
+Otherwise, we first calculate the $Type(S_1^C)$.
+
+We prove first the following claim.
+\begin{claim}
+\label{Claim 7}
+Let $c = |S_1| - 2^{n - 2}$, then $Type(S_1^C) = Type(S_1) - c$.
+\end{claim}
+\begin{proof}
+\begin{align*}
+Type(S_1^C)
+& = 2^{n - 2} - (|S_1| - Type(S_1)) \\
+& = 2^{n - 2} - |S_1| + Type(S_1) \\
+& = 2^{n - 2} - (2^{n - 2} + c) + Type(S_1) \\
+& = 2^{n - 2} - 2^{n - 2} - c + Type(S_1) \\
+& = Type(S_1) - c.
+\end{align*}
+\end{proof}
+
+We also make the following calculation:
+\begin{align*}
+|S_1| & = \frac{|S|}{2} + \frac{h - l}{2} \\
+      & \le \frac{2^{n - 1}}{2} + \frac{h - l}{2} \\
+      & = 2^{n - 2} + \frac{h - l}{2}.
+\end{align*}
+Since
+\begin{equation*}
+|S_1| = 2^{n - 2} + c,
+\end{equation*}
+we conclude from the above calculation,
+\begin{equation*}
+c \le \frac{h - l}{2}.
+\end{equation*}
+\begin{align*}
+Type(S_1) + (Type(S_1) + l) & \ge Type(S) \\
+      2 \cdot Type(S_1) + l & \ge Type(S) \\
+	  2 \cdot Type(S_1) & \ge Type(S) - l \\
+		  Type(S_1) & \ge \frac{Type(S) - l}{2}.
+\end{align*}
+
+From Claim \ref{Claim 7}, and earlier calculation,
+\begin{align*}
+Type(S_1^C)
+& = Type(S_1) - c \\
+& \ge Type(S_1) - \frac{h - l}{2} \\
+& \ge \frac{Type(S) - l}{2} - \frac{h - l}{2} \\
+& = \frac{1}{2} (Type(S) - h) \\
+& \ge \frac{1}{2} ((\frac{1}{24} + \frac{7}{64}) \cdot 2^n - \frac{7}{64} \cdot 2^n) \\
+& = \frac{1}{2} (\frac{1}{24} \cdot 2^n) \\
+& = \frac{1}{24} \cdot 2^{n - 1}.
+\end{align*}
+
+We abbreviate $Type(S_1^C)$ with $w^C$.
+
+We note that $w_2 \ge w_1 \ge w^C + c \ge \frac{1}{24} \cdot 2^{n - 1}$.
+
+It is now possible to proceed with the induction, since
+\begin{align*}
+\theta(S)
+& \ge \theta(S_1) + \theta(S_2) + (h - l) \cdot 2^n \\
+& = \theta(S_1^C) + \theta(S_2) + (h - l) \cdot 2^n \\
+& \ge 2^{n - 1} \cdot f(1 - (x + (h - l))) +
+      2^{n - 1} \cdot f(x - (h - l)) + 2 \cdot (h - l) \cdot 2^{n - 1} \\
+& = 2^{n - 1} \cdot f(x + (h - l)) + 2^{n - 1} \cdot f(x - (h - l)) +
+    2 \cdot (h - l) \cdot 2^{n - 1} \\
+& = 2^{n - 1} (f(x + (h - l)) + f(x - (h - l)) + 2 \cdot (h - l)) \\
+& \ge 2^{n - 1} (2 f(x)) \\
+& = 2^n f(x).
+\end{align*}
 The proof is complete!
 \end{proof}
 
@@ -1248,7 +1256,7 @@ The proof is complete!
 \chapter{Conclusion}
 \label{Chapter 5}
 
-Recall that for a subset of $Q_n$, cardinality $k$, and type $t$,
+Recall that for a subset of $V_n$, cardinality $k$, and type $t$,
 \begin{equation*}
 \theta(n, k, t) = \min_{\substack{
 	S \subseteq V_n, |S| = k \\
@@ -1270,7 +1278,7 @@ We believe that in general,
 \begin{equation*}
 \theta(n, k, t) \ge k + 2 t.
 \end{equation*}
-We note that the very special case,
+We noted that the very special case,
 \begin{equation*}
 \theta(n, k, 0) \ge k,
 \end{equation*}
